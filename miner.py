@@ -111,6 +111,7 @@ def playGame(string, winner, printStates=False,printStats=False,wait=False, prin
         if wait:
             i=input('press enter:')
         g=gs.gamestate(board, ep ,canCastle,hasCastled)
+
         g.getPinnedSquares()
         g.pinPieces()
         g.getAllMoves()

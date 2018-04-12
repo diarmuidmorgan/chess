@@ -386,8 +386,9 @@ class gamestate():
         return board
 
     def moveToInstruction(self,color,move):
+        
         #method for turning the move Instructions from 'miner2.py' into new board states
-        self.enpassants ={-1:[],1:[]}
+        #self.enpassants ={-1:[],1:[]}
         cols = move['cols']
         typ=move['type']
 
@@ -429,12 +430,14 @@ class gamestate():
 
                     result = self.searchPawnMove(color, cols[0],'forward',number=rows[0])
                     #e.g e4
-                    if abs(rows[0]-result['pos'][0])>1:
+                    self.enpassants={-1:[], 1:[]}
 
-                        self.enpassants[color]+=[rows[0],cols[0]]
                     origin = result['pos']
                     d = [rows[0],cols[0]]
                     board=self.simpleMove(color, 1, origin, d)
+                    if abs(rows[0]-result['pos'][0])>1:
+
+                        self.enpassants[color]+=[rows[0],cols[0]]
 
 
                 else:
