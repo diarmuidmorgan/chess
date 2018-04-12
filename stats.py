@@ -197,7 +197,7 @@ class analyze():
 
     def produceStateArray(self):
 
-        self.arr =np.zeros(79, dtype=np.int)
+        self.arr =np.zeros(81, dtype=np.int)
         count=0
         for x in range(0, len(self.board)):
 
