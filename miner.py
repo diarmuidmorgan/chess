@@ -5,7 +5,7 @@ from models import forest
 import numpy as np
 
 import pandas as pd
-fi=forest(pikl='data/forestmodelDepth20.pkl')
+#fi=forest(pikl='data/forestmodelDepth20.pkl')
 
 def mine(row):
 
@@ -123,9 +123,9 @@ def playGame(string, winner, printStates=False,printStats=False,wait=False, prin
 
         board=g.moveToInstruction(color,new_move)
 
-        if printPredict:
-            print('actual winner:', winner)
-            print('Predicted winner', fi.evaluate(board,move))
+        #if printPredict:
+            #print('actual winner:', winner)
+            #print('Predicted winner', fi.evaluate(board,move))
         ep=g.enpassants
 
         ao=an(g)
