@@ -32,15 +32,13 @@ class analyze():
             self.board = state.board
             self.checked = state.checked
             #will do these another night
-            #self.hasCastled = state.hasCastled['white']+state.hasCastled['black']
-            #self.canCastle = state.canCastle['white']+state.canCastle['black']
+            self.hasCastled = state.hasCastled[1000]-state.hasCastled[-1000]
+            self.canCastle = state.canCastle['1000']['king']+state.canCastle['1000']['queen']-state.canCastle[-1000]['king']-state.canCastle[-1000]['queen']
             self.enpassants = len(state.enpassants[1])-len(state.enpassants[-1])
             self.pins=len(state.pinnedSquares[1000]) - len(state.pinnedSquares[-1000])
 
 
     def loadState(self,state):
-
-
         self.moves=0
         self.captures=0
         self.protected=0
@@ -58,8 +56,8 @@ class analyze():
         self.board = state.board
         self.checked = state.checked
         #will do these another night
-        #self.hasCastled = state.hasCastled['white']+state.hasCastled['black']
-        #self.canCastle = state.canCastle['white']+state.canCastle['black']
+        self.hasCastled = state.hasCastled[1000]-state.hasCastled[-1000]
+        self.canCastle = state.canCastle['1000']['king']+state.canCastle['1000']['queen']-state.canCastle[-1000]['king']-state.canCastle[-1000]['queen']
         self.enpassants = len(state.enpassants[1])-len(state.enpassants[-1])
         self.pins=len(state.pinnedSquares[1000]) - len(state.pinnedSquares[-1000])
 
