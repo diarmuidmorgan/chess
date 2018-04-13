@@ -29,7 +29,7 @@ def row_to_board(row):
     for x in range(0,8):
         board.append([])
 
-        for y in range(0,7):
+        for y in range(0,8):
 
             board[x].append(row[str(x)+str(y)])
 

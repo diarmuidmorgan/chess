@@ -33,7 +33,7 @@ class analyze():
             self.checked = state.checked
             #will do these another night
             self.hasCastled = state.hasCastled[1000]-state.hasCastled[-1000]
-            self.canCastle = state.canCastle[1000]['king']+state.canCastle[1000]['queen']-state.canCastle[-1000]['king']-state.canCastle[-1000]['queen']
+            self.canCastle = int(state.canCastle[1000]['king'])+int(state.canCastle[1000]['queen'])-int(state.canCastle[-1000]['king'])-int(state.canCastle[-1000]['queen'])
             self.enpassants = len(state.enpassants[1])-len(state.enpassants[-1])
 
             self.pins=len(state.pinnedSquares[1000]) - len(state.pinnedSquares[-1000])
