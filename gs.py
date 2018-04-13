@@ -407,7 +407,7 @@ class gamestate():
         elif abs(piece) in [5,-5]:
 
             if origin == [0,0]:
-                self.CanCastle[1000]['king']=False
+                self.canCastle[1000]['king']=False
             elif origin == [7,0]:
                 self.canCastle[-1000]['king']=False
 
