@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: dublin-bikes
+Version: 0.0.post0.dev10+g70e6dad.dirty
+Summary: Add a short description here!
+Home-page: http://...
+Author: Chen Yiming, Louis, diarmuidmorgan,
+Author-email: diarmuidmorgan@hotmail.com
+License: mit
+Description-Content-Type: UNKNOWN
+Description: UNKNOWN
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
