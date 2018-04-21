@@ -9,7 +9,7 @@ import numpy as np
 fi=forest(pikl='data/forestmodelDepth20.pkl')
 
 def MO(move):
-
+    print(move)
     places=['a','b','c','d','e','f','g']
     rows={'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6,'8':7}
     pieces=['N','K','B','R','Q']

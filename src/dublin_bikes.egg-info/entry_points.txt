@@ -1,0 +1,4 @@
+
+[console_scripts]
+run_dublinbikes = dublin_bikes.dublin_bikes.run:run
+

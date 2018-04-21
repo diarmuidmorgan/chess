@@ -47,6 +47,18 @@ class gamestate():
 
                     collection[piece].append({'pos':[x,y], 'moves':[], 'captures':[], 'pin':None})
 
+        if board[0][0] != 5:
+            self.canCastle[1000]['king']=False
+
+        if board[7][7] != -5:
+            self.canCastle[-1000]['queen']=False
+
+        if board[0][7] != 5:
+            self.canCastle[1000]['queen']=False
+
+        if board[7][0] != -5:
+            self.canCastle[-1000]['king']=False
+
 
 
 
@@ -161,6 +173,7 @@ class gamestate():
                     found=True
                     moves = self.pawn.returnValidMoves(x, y,color,board, self.enpassants[color*-1],pin)
                     self.checks[color] += moves['checked']
+                    self.checks[color]+=moves['captures']
                     #the squares checked by the pawn must be added seperately, because they are not actually valid moves that the pawn can move into
                 elif abs(pieceType)==3:
 
@@ -188,6 +201,7 @@ class gamestate():
                     if abs(pieceType)!=1:
                     #if the piece isn't a pawn, all of its valid moves that aren't already captures or protects, are squares that are checked (and the king can't move there)
                         self.checks[color] += moves['moves']
+                        self.checks[color] += moves['captures']
                     else:
                         #add enpassant squares that the pawn can capture to it's 'ep' moves
                         self.collection[pieceType][i]['ep']=moves['ep']
@@ -203,6 +217,7 @@ class gamestate():
         #now do the kings. We know what squares have been checked and made invalid
         for piece in [1000, -1000]:
 
+
             color = int(piece/abs(piece))
             x=self.collection[piece][0]['pos'][0]
             y=self.collection[piece][0]['pos'][1]
@@ -216,7 +231,8 @@ class gamestate():
             self.collection[piece][0]['captures']=moves['captures']
             self.collection[piece][0]['protects']=moves['protects']
 
-            #also find if we're in check
+
+
             if self.king.isChecked(x, y, self.checks[color*-1]):
 
                 self.checked+=color
@@ -383,10 +399,30 @@ class gamestate():
         y2 = destination[1]
         board[x1][y1]=0
         board[x2][y2]=piece*color
+
+        if abs(piece) in [1000,-1000]:
+
+            self.canCastle[color*piece]['king']=False
+            self.canCastle[color*piece]['queen']=False
+        elif abs(piece) in [5,-5]:
+
+            if origin == [0,0]:
+                self.canCastle[1000]['king']=False
+            elif origin == [7,0]:
+                self.canCastle[-1000]['king']=False
+
+            elif origin == [0,7]:
+                self.canCastle[1000]['queen']=False
+
+            elif origin == [7,7]:
+                self.canCastle[-1000]['queen']=False
+
+
+
         return board
 
     def moveToInstruction(self,color,move):
-        
+
         #method for turning the move Instructions from 'miner2.py' into new board states
         #self.enpassants ={-1:[],1:[]}
         cols = move['cols']
@@ -424,6 +460,12 @@ class gamestate():
                     destination = [rows[0],cols[0]]
                     origin =self.searchPieceMove(color,piece,destination)
                     board=self.simpleMove(color,piece,origin,destination)
+
+
+
+
+
+
 
             else:
                 if len(cols)==1:
@@ -488,14 +530,14 @@ class gamestate():
 
                     if color == 1:
                         if origin == [0,0]:
-                            self.canCastle[move['piece']]['queen']=False
-                        elif origin == [0,7]:
                             self.canCastle[move['piece']]['king']=False
+                        elif origin == [0,7]:
+                            self.canCastle[move['piece']]['queen']=False
                     else:
                         if origin == [7,0]:
-                            self.canCastle[move['piece']]['queen']=False
-                        elif origin == [7,7]:
                             self.canCastle[move['piece']]['king']=False
+                        elif origin == [7,7]:
+                            self.canCastle[move['piece']]['queen']=False
 
 
 
