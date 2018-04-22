@@ -1,12 +1,12 @@
-from pieces.vc import validCoords
 
-class queen():
-    #just a bishop and a rook
+from chess.pieces.vc import validCoords
+
+class bishop():
+
     def __init__(self, pieces):
 
-        self.value = pieces['QUEEN']
+        self.value = pieces['BISHOP']
         self.pinned = 0
-
 
 
     def canMove(self, origin, destination):
@@ -16,12 +16,14 @@ class queen():
     def returnValidMoves(self, x, y, color,board,pin):
         self.color = color
         arr = []
-        Capturearr = []
-        Protectarr=[]
-
+        Capturearr=[]
+        Protectarr = []
+        result={'moves':[], 'captures':[], 'protects':[]}
         if pin == None:
 
-            for i in [[1,0], [-1, 0], [0,-1], [0,1],[1,1], [-1, -1], [1,-1], [-1,1]]:
+
+
+            for i in [[1,1], [-1, -1], [1,-1], [-1,1]]:
 
                 ix = i[0]; iy = i[1]
                 lx = x; ly = y
@@ -35,29 +37,26 @@ class queen():
 
                         if board[lx][ly] == 0:
 
-                            arr.append([lx,ly])
+                            result['moves'].append([lx,ly])
 
                         elif board[lx][ly] * self.color < 0:
 
-
-                            Capturearr.append([lx, ly])
                             blocked = True
-                            break
+                            result['captures'].append([lx, ly])
 
                         else:
+
                             blocked = True
-                            Protectarr.append([lx,ly])
-                            break
+                            result['protects'].append([lx, ly])
 
                     else:
                         blocked = True
-                        break
 
         else:
-            
-            for i in [[1,0], [-1, 0], [0,-1], [0,1],[1,1], [-1, -1], [1,-1], [-1,1]]:
-                if i in pin:
 
+            for i in [[1,1], [-1, -1], [1,-1], [-1,1]]:
+
+                if i in pin:
                     ix = i[0]; iy = i[1]
                     lx = x; ly = y
                     blocked = False
@@ -70,22 +69,20 @@ class queen():
 
                             if board[lx][ly] == 0:
 
-                                arr.append([lx,ly])
+                                result['moves'].append([lx,ly])
 
                             elif board[lx][ly] * self.color < 0:
 
-
-                                Capturearr.append([lx, ly])
                                 blocked = True
-                                break
+                                result['captures'].append([lx, ly])
 
                             else:
+
                                 blocked = True
-                                Protectarr.append([lx,ly])
-                                break
+                                result['protects'].append([lx, ly])
 
                         else:
                             blocked = True
-                            break
 
-        return {'moves':arr, 'captures':Capturearr, 'protects':Protectarr}
+
+        return result

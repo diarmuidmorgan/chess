@@ -1,10 +1,10 @@
-from pieces.vc import validCoords
+from chess.pieces.vc import validCoords
 
-class rook():
-    #basically the same as bishop
+class queen():
+    #just a bishop and a rook
     def __init__(self, pieces):
 
-        self.value = pieces['ROOK']
+        self.value = pieces['QUEEN']
         self.pinned = 0
 
 
@@ -14,16 +14,14 @@ class rook():
         pass
 
     def returnValidMoves(self, x, y, color,board,pin):
-        self.color=color
+        self.color = color
         arr = []
         Capturearr = []
-        Protectarr = []
+        Protectarr=[]
 
         if pin == None:
 
-
-
-            for i in [[1,0], [-1, 0], [0,-1], [0,1]]:
+            for i in [[1,0], [-1, 0], [0,-1], [0,1],[1,1], [-1, -1], [1,-1], [-1,1]]:
 
                 ix = i[0]; iy = i[1]
                 lx = x; ly = y
@@ -34,29 +32,32 @@ class rook():
                     lx+=ix; ly+=iy
 
                     if validCoords(lx,ly):
+
                         if board[lx][ly] == 0:
 
                             arr.append([lx,ly])
 
                         elif board[lx][ly] * self.color < 0:
 
-                            blocked = True
+
                             Capturearr.append([lx, ly])
+                            blocked = True
+                            break
 
                         else:
-
                             blocked = True
-                            Protectarr.append([lx, ly])
+                            Protectarr.append([lx,ly])
+                            break
 
                     else:
-
+                        blocked = True
                         break
 
         else:
             
-            for i in [[1,0], [-1, 0], [0,-1], [0,1]]:
-
+            for i in [[1,0], [-1, 0], [0,-1], [0,1],[1,1], [-1, -1], [1,-1], [-1,1]]:
                 if i in pin:
+
                     ix = i[0]; iy = i[1]
                     lx = x; ly = y
                     blocked = False
@@ -66,23 +67,25 @@ class rook():
                         lx+=ix; ly+=iy
 
                         if validCoords(lx,ly):
+
                             if board[lx][ly] == 0:
 
                                 arr.append([lx,ly])
 
                             elif board[lx][ly] * self.color < 0:
 
-                                blocked = True
+
                                 Capturearr.append([lx, ly])
+                                blocked = True
+                                break
 
                             else:
-
                                 blocked = True
-                                Protectarr.append([lx, ly])
+                                Protectarr.append([lx,ly])
+                                break
 
                         else:
-
+                            blocked = True
                             break
-
 
         return {'moves':arr, 'captures':Capturearr, 'protects':Protectarr}

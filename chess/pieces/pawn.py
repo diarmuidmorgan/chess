@@ -1,4 +1,4 @@
-from pieces.vc import validCoords
+from chess.pieces.vc import validCoords
 
 class pawn():
 

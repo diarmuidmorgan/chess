@@ -6,7 +6,7 @@ Created on Thu Apr 12 15:56:22 2018
 @author: eoin
 """
 
-import miner
+import chess.miner as miner
 import pandas as pd
 games = pd.read_csv('data/cleanChess.csv')
 games_exploded = miner.mine(games.iloc[0])

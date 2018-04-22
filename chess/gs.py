@@ -1,5 +1,5 @@
-from pieces.vc import validCoords
-from pieces import pawn, king, queen, bishop, knight, rook
+from chess.pieces.vc import validCoords
+from chess.pieces import pawn, king, queen, bishop, knight, rook
 
 
 
